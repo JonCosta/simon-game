@@ -1,26 +1,27 @@
 $block-width = 100px
 $block-height = 100px
 
-.block__green {
-    background-color: green
+.circle-quarter {
     height: $block-height
     width: $block-width
 }
 
-.block__red {
-    background-color: red
-    height: $block-height
-    width: $block-width
+.circle-quarter[data-color="green"] { 
+    background-color: green;
+    border-top-left-radius: 200px;
+}
+    
+.circle-quarter[data-color="red"] { 
+    background-color: red;
+    border-top-right-radius: 200px;
 }
 
-.block__yellow {
-    background-color: yellow
-    height: $block-height
-    width: $block-width
+.circle-quarter[data-color="yellow"] { 
+    background-color: yellow;
+    border-bottom-left-radius: 200px;
 }
 
-.block__blue {
-    background-color: blue
-    height: $block-height
-    width: $block-width
+.circle-quarter[data-color="blue"] { 
+    background-color: blue;
+    border-bottom-right-radius: 200px;
 }
