@@ -1,6 +1,8 @@
+.main-circle {
+  margin-top: 10vh;
+}
 .circle-quarter {
-  height: 100px;
-  width: 100px;
+  height: 40vh;
 }
 .circle-quarter[data-color="green"] {
   background-color: #008000;
