@@ -1,22 +1,83 @@
-.main-circle {
-  margin-top: 10vh;
-}
 .circle-quarter {
+  height: 28vh;
+  margin: 30px;
+  position: absolute;
+  width: 28vh;
+}
+.main-circle {
+  background-color: #333;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  height: 70vh;
+  margin: 0 auto;
+  margin-top: 10vh;
+  position: relative;
+  width: 70vh;
+}
+.circle-center {
+  background-color: #fff;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
   height: 40vh;
+  width: 40vh;
+  left: 15vh;
+  position: absolute;
+  top: 15vh;
+  text-align: center;
 }
-.circle-quarter[data-color="green"] {
+.circle-green {
   background-color: #008000;
-  border-top-left-radius: 200px;
+  -webkit-border-radius: 100% 0 0 0;
+  -moz-border-radius: 100% 0 0 0;
+  -o-border-radius: 100% 0 0 0;
+  border-radius: 100% 0 0 0;
+  top: 0;
+  left: 0;
 }
-.circle-quarter[data-color="red"] {
+.circle-red {
   background-color: #f00;
-  border-top-right-radius: 200px;
+  -webkit-border-radius: 0 100% 0 0;
+  -moz-border-radius: 0 100% 0 0;
+  -o-border-radius: 0 100% 0 0;
+  border-radius: 0 100% 0 0;
+  right: 0;
+  top: 0;
 }
-.circle-quarter[data-color="yellow"] {
+.circle-yellow {
   background-color: #ff0;
-  border-bottom-left-radius: 200px;
+  -webkit-border-radius: 0 0 0 100%;
+  -moz-border-radius: 0 0 0 100%;
+  -o-border-radius: 0 0 0 100%;
+  border-radius: 0 0 0 100%;
+  bottom: 0;
+  left: 0;
 }
-.circle-quarter[data-color="blue"] {
+.circle-blue {
   background-color: #00f;
-  border-bottom-right-radius: 200px;
+  -webkit-border-radius: 0 0 100% 0;
+  -moz-border-radius: 0 0 100% 0;
+  -o-border-radius: 0 0 100% 0;
+  border-radius: 0 0 100% 0;
+  bottom: 0;
+  right: 0;
+}
+.btn-start {
+  background-color: #fa8072;
+  color: #fff;
+  margin-top: 40%;
+}
+.btn-start:hover {
+  background-color: #daa520;
+  color: #fff;
+}
+.counter {
+  background-color: #333;
+  border: none;
+  color: #fff;
+  text-align: center;
+  width: 5vw;
 }

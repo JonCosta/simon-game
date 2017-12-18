@@ -1,31 +1,101 @@
 $block-width = 100px
-$block-height = 40vh
+$block-height = 15vh
+$size-px = 400px
 
-.main-circle {
-    margin-top: 10vh
-    }
+$green-circle-radius = 100% 0 0 0
+$red-circle-radius = 0 100% 0 0
+$yellow-circle-radius = 0 0 0 100%
+$blue-circle-radius = 0 0 100% 0
 
 .circle-quarter {
-    height: $block-height
-    // width: $block-width
+    height: 28vh
+    margin: 30px
+    position: absolute
+    width: 28vh
 }
 
-.circle-quarter[data-color="green"] { 
+.main-circle {
+    background-color #333
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    height: 70vh
+    margin: 0 auto
+    margin-top: 10vh
+    position: relative
+    width: 70vh
+}
+
+.circle-center {
+    background-color #fff
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    height: 40vh
+    width: 40vh
+    left: 15vh
+    position: absolute
+    top: 15vh
+    text-align: center
+}
+
+.circle-green { 
     background-color: green;
-    border-top-left-radius: 200px;
+    -webkit-border-radius: $green-circle-radius;
+    -moz-border-radius: $green-circle-radius;
+    -o-border-radius: $green-circle-radius;
+    border-radius: $green-circle-radius;
+    top: 0
+    left: 0
 }
     
-.circle-quarter[data-color="red"] { 
+.circle-red { 
     background-color: red;
-    border-top-right-radius: 200px;
+    -webkit-border-radius: $red-circle-radius;
+    -moz-border-radius: $red-circle-radius;
+    -o-border-radius: $red-circle-radius;
+    border-radius: $red-circle-radius;
+    right: 0
+    top: 0
 }
 
-.circle-quarter[data-color="yellow"] { 
+.circle-yellow { 
     background-color: yellow;
-    border-bottom-left-radius: 200px;
+    -webkit-border-radius: $yellow-circle-radius;
+    -moz-border-radius: $yellow-circle-radius;
+    -o-border-radius: $yellow-circle-radius;
+    border-radius: $yellow-circle-radius;
+    bottom: 0
+    left: 0
 }
 
-.circle-quarter[data-color="blue"] { 
+.circle-blue { 
     background-color: blue;
-    border-bottom-right-radius: 200px;
+    -webkit-border-radius: $blue-circle-radius;
+    -moz-border-radius: $blue-circle-radius;
+    -o-border-radius: $blue-circle-radius;
+    border-radius: $blue-circle-radius;
+    bottom: 0
+    right: 0
+}
+
+.btn-start {
+    background-color: salmon
+    color: #fff
+    margin-top: 40%
+
+    &:hover {
+        background-color goldenrod
+        color: #fff
+    }
+}
+
+.counter {
+    background-color #333333
+    border: none
+    color: white
+    text-align: center
+    width: 5vw
 }
