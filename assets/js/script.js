@@ -2,12 +2,35 @@ $(function () {
 
     var colors = ["green", "blue", "yellow", "red"];
     var colorSounds = {
-        green: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"),
-        blue: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"),
-        yellow: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"),
-        red: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3")
+        green: document.getElementById('soundGreen'),
+        blue: document.getElementById('soundBlue'),
+        yellow: document.getElementById('soundYellow'),
+        red: document.getElementById('soundRed')
     };
-    var targetSequence = [];
+
+    $('.btnTest').click(function() {
+        playSoundFromArray();
+        $(this).hide();
+    });
+
+    function playSoundFromArray() {
+        if (!targetSequence.length) return false;
+        var currentColor = targetSequence.shift();
+        $(`[data-color="${currentColor}"]`).css('opacity', '1');
+        var audio = colorSounds[currentColor];
+        audio.addEventListener("ended", function() {
+            playSoundFromArray();
+            $(`[data-color="${currentColor}"]`).css('opacity', '0.8');
+        });
+        audio.play();
+
+    }
+    
+    function playSoundFromButton(buttonColor) {
+        colorSounds[buttonColor].play();
+    }
+    
+    var targetSequence = ['green', 'blue', 'red', 'green', 'yellow'];
     var playerSequence = [];
 
     function startGame() {
@@ -80,13 +103,14 @@ $(function () {
     $('.circle-quarter').click(function (e) {
         e.preventDefault();
         let color = $(this).data('color');
-        playerSequence.push(color);
+        playSoundFromButton(color);
+        /* playerSequence.push(color);
         colorSounds[color].play();
         setTimeout(() => {
             colorSounds[color].pause();
             colorSounds[color].currentTime = 0;
         }, 600);
-        checkSequences();
+        checkSequences(); */
     });
 
 });
