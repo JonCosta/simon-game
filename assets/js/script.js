@@ -16,18 +16,24 @@ $(function () {
     function playSoundFromArray() {
         if (!targetSequence.length) return false;
         var currentColor = targetSequence.shift();
-        $(`[data-color="${currentColor}"]`).css('opacity', '1');
         var audio = colorSounds[currentColor];
         audio.addEventListener("ended", function() {
             playSoundFromArray();
             $(`[data-color="${currentColor}"]`).css('opacity', '0.8');
         });
-        audio.play();
+        setTimeout(() => {
+            $(`[data-color="${currentColor}"]`).css('opacity', '1');
+            audio.play();
+        }, 150);
 
     }
     
     function playSoundFromButton(buttonColor) {
+        $(`[data-color="${buttonColor}"]`).css('opacity', '1');
         colorSounds[buttonColor].play();
+        setTimeout(() => {
+            $(`[data-color="${buttonColor}"]`).css('opacity', '0.8');
+        }, 130);
     }
     
     var targetSequence = ['green', 'blue', 'red', 'green', 'yellow'];
