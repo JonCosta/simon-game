@@ -1,49 +1,83 @@
-$block-width = 100px
-$block-height = 15vh
-$size-px = 400px
+@import url('https://fonts.googleapis.com/css?family=Bungee');
+
+$fontTitle = 'Bungee', cursive
 
 $green-circle-radius = 100% 0 0 0
 $red-circle-radius = 0 100% 0 0
 $yellow-circle-radius = 0 0 0 100%
 $blue-circle-radius = 0 0 100% 0
 
-.circle-quarter {
-    height: 28vh
-    margin: 30px
-    opacity: 0.8
-    position: absolute
-    width: 28vh
+$colorBlack = #161925
+$colorRed = #d00000
+$colorGreen = #688e26
+$colorYellow = #ffb20f
+$colorBlue = #053c5e
+$colorCenter = #fff8f0
+$colorBackground = #BEB0a7
+$colorStartButton = #7cb518 
+$colorStrictButton = #a10702
+$colorOnOffButton = #235789
+
+$circle-main-size = 500px
+$circle-quarter-size = 210px
+$circle-center-size = 270px
+$circle-center-wrap-size = 290px
+
+body {
+    background-color: $colorBackground
 }
 
-.main-circle {
-    background-color #333
+.circle-quarter {
+    height: $circle-quarter-size
+    margin: 25px
+    opacity: 0.6
+    position: absolute
+    width: $circle-quarter-size
+}
+
+.circle-main {
+    background-color $colorBlack
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -o-border-radius: 50%;
-    height: 70vh
+    height: $circle-main-size
     margin: 0 auto
     margin-top: 10vh
     position: relative
-    width: 70vh
+    width: $circle-main-size
 }
 
-.circle-center {
-    background-color #fff
+.circle-center-wrap {
+    background-color: $colorBlack
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -o-border-radius: 50%;
-    height: 40vh
-    width: 40vh
-    left: 15vh
+    height: $circle-center-wrap-size
+    left: 100px
+    margin: 0 auto
     position: absolute
-    top: 15vh
+    top: 100px
+    width: $circle-center-wrap-size
+}
+
+.circle-center {
+    background-color $colorCenter
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    height: $circle-center-size
+    left: 10px
+    position: absolute
     text-align: center
+    top: 10px
+    width: $circle-center-size
 }
 
 .circle-green { 
-    background-color: green;
+    background-color: $colorGreen;
     -webkit-border-radius: $green-circle-radius;
     -moz-border-radius: $green-circle-radius;
     -o-border-radius: $green-circle-radius;
@@ -53,7 +87,7 @@ $blue-circle-radius = 0 0 100% 0
 }
     
 .circle-red { 
-    background-color: red;
+    background-color: $colorRed;
     -webkit-border-radius: $red-circle-radius;
     -moz-border-radius: $red-circle-radius;
     -o-border-radius: $red-circle-radius;
@@ -63,7 +97,7 @@ $blue-circle-radius = 0 0 100% 0
 }
 
 .circle-yellow { 
-    background-color: yellow;
+    background-color: $colorYellow;
     -webkit-border-radius: $yellow-circle-radius;
     -moz-border-radius: $yellow-circle-radius;
     -o-border-radius: $yellow-circle-radius;
@@ -73,7 +107,7 @@ $blue-circle-radius = 0 0 100% 0
 }
 
 .circle-blue { 
-    background-color: blue;
+    background-color: $colorBlue;
     -webkit-border-radius: $blue-circle-radius;
     -moz-border-radius: $blue-circle-radius;
     -o-border-radius: $blue-circle-radius;
@@ -83,9 +117,11 @@ $blue-circle-radius = 0 0 100% 0
 }
 
 .btn-start {
-    background-color: salmon
+    background-color: $colorStartButton
     color: #fff
-    margin-top: 40%
+    position: absolute
+    left: 160px
+    top: 111px
 
     &:hover {
         background-color goldenrod
@@ -93,10 +129,71 @@ $blue-circle-radius = 0 0 100% 0
     }
 }
 
+.center-title-wrap {
+    color: $colorBlack
+    height: 30px
+    position: absolute
+    top: 60px
+    width: 100%
+}
+
+.center-title {
+    font-family: $fontTitle
+    font-size: 30px
+    text-decoration: underline
+}
+
+
 .counter {
-    background-color #333333
+    background-color: $colorBlack
     border: none
     color: white
+    font-family: $fontTitle
+    font-size: 20px
+    height: 40px
+    left: 50px
+    position: absolute
     text-align: center
-    width: 5vw
+    top: 110px
+    width: 100px
+}
+
+.btn-on-off {
+    background-color: $colorOnOffButton
+    color: #fff
+    left: 80px
+    position: absolute
+    top: 200px
+}
+
+.on-off {
+    position: absolute
+    left: 180px
+    top: 207px
+}
+
+.btn-strict {
+    background-color: $colorStrictButton
+    color: #fff    
+    left: 87px
+    position: absolute
+    top: 160px
+}
+
+.strict {
+    position: absolute
+    left: 180px
+    top: 167px
+}
+
+.small-display {
+    background-color: #000
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    height: 20px
+    // position: absolute
+    width: 20px
+
 }

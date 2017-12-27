@@ -1,5 +1,26 @@
 $(function () {
 
+    var targetSequence = [];
+    var targetSequenceCopy = [];
+    var playerSequence = [];
+    var audioPlayer;
+    var soundPlaying;
+    var stepCount = 0;
+    var strictMode = false;
+    var isGameOn = false;
+    var isGameRunning = false;
+
+    function resetVariables() {
+        targetSequence = [];
+        playerSequence = [];
+        stepCount = 0;
+        strictMode = false;
+        isGameOn = false;
+        isGameRunning = false;
+        $('.counter').val('--');
+        $('.strict').css('background-color', '#000');
+    }
+
     var colors = ["green", "blue", "yellow", "red"];
     var colorSounds = {
         green: document.getElementById('soundGreen'),
@@ -8,115 +29,139 @@ $(function () {
         red: document.getElementById('soundRed')
     };
 
-    $('.btnTest').click(function() {
-        playSoundFromArray();
-        $(this).hide();
+    $(".btn-start").click(function (e) {
+        e.preventDefault();
+        startNewGame();
+    });
+
+    $('.circle-quarter').click(function (e) {
+        e.preventDefault();
+        if (!isGameOn || !isGameRunning) return false;        
+        let color = $(this).data('color');
+        playSoundFromButton(color);
+        playerSequence.push(color);
+        checkSequences();
+    });
+
+    $('.btn-strict').click(function (e) { 
+        e.preventDefault();
+        if (!isGameOn) return false;
+        strictMode = !strictMode;
+        let displayColor = strictMode ? 'salmon' : '#000' ;
+        $('.strict').css('background-color', displayColor);
+    });
+
+    $('.btn-on-off').click(function (e) { 
+        e.preventDefault();
+        isGameOn = !isGameOn;
+        if (!isGameOn) {
+            resetVariables();
+        }
+        let displayColor = isGameOn ? 'salmon' : '#000' ;
+        $('.on-off').css('background-color', displayColor);
     });
 
     function playSoundFromArray() {
-        if (!targetSequence.length) return false;
-        var currentColor = targetSequence.shift();
-        var audio = colorSounds[currentColor];
-        audio.addEventListener("ended", function() {
-            playSoundFromArray();
-            $(`[data-color="${currentColor}"]`).css('opacity', '0.8');
-        });
-        setTimeout(() => {
-            $(`[data-color="${currentColor}"]`).css('opacity', '1');
-            audio.play();
-        }, 150);
+        if (targetSequenceCopy.length) {
 
+            var currentColor = targetSequenceCopy.shift();
+            audioPlayer = colorSounds[currentColor];
+    
+            audioPlayer.addEventListener("ended", function() {
+                $(`[data-color="${currentColor}"]`).css('opacity', '0.6');
+            });
+
+            $(`[data-color="${currentColor}"]`).css('opacity', '1');
+            audioPlayer.play();
+            
+        } else {
+            clearInterval(soundPlaying);
+            isGameRunning = true;
+        }
     }
     
     function playSoundFromButton(buttonColor) {
         $(`[data-color="${buttonColor}"]`).css('opacity', '1');
         colorSounds[buttonColor].play();
         setTimeout(() => {
-            $(`[data-color="${buttonColor}"]`).css('opacity', '0.8');
+            $(`[data-color="${buttonColor}"]`).css('opacity', '0.6');
         }, 130);
     }
     
-    var targetSequence = ['green', 'blue', 'red', 'green', 'yellow'];
-    var playerSequence = [];
+    function startSoundSequence() {
+        isGameRunning = false;
+        targetSequenceCopy = targetSequence.slice(0);
+        soundPlaying = setInterval(function() {
+            playSoundFromArray();
+        }, 600);
+    }
 
-    function startGame() {
-        console.log("Game started");
+    function startNewGame() {
+        if (!isGameOn) return false;
+        isGameRunning = true;
+        
         targetSequence = [];
         playerSequence = [];
-        addToSequence();
-        presentSequence();
+        addStepToSequence();
+        stepCount = 1;
+        setCounterNumber(stepCount);
+        startSoundSequence();
     }
 
-    function addToSequence() {
+    function addStepToSequence() {
         let randomIndex = Math.floor(Math.random() * 4);
         targetSequence.push(colors[randomIndex]);
-        console.log(targetSequence);
-    }
-
-    function presentSequence() {
-        console.log("Presenting steps");
-        for (let i = 0; i < targetSequence.length; i++) {
-            const step = targetSequence[i];
-            console.log("Step", step);
-            colorSounds[step].play();
-            setTimeout(() => {
-                colorSounds[step].pause();
-                colorSounds[step].currentTime = 0;
-            }, 600);
-            sleep(700);
-        }
     }
 
     function checkSequences() {
-        console.log("Checking sequences");
+        // console.log("Checking sequences", playerSequence, targetSequence);
+        isGameRunning = false;
         for (let i = 0; i < playerSequence.length; i++) {
             if (playerSequence[i] != targetSequence[i]) {
                 console.log("Wrong!");
-                sleep(1000);
+                returnWrongResult();
                 return false;
-                presentSequence();
-                playerSequence = [];
             }
         }
-
-        console.log("Correct!");
-        if (playerSequence.length == 20) {
-            // WINNER
-            return false;
-        }
-
+        
         if (playerSequence.length == targetSequence.length) {
-            addToSequence();
-            presentSequence();
-            playerSequence = [];
-        }
-    }
-
-    function sleep(milliseconds) {
-        var start = new Date().getTime();
-        for (let i = 0; i < 1e7; i++) {
-            if ((new Date().getTime() - start) > milliseconds) {
-                break;
+            if (stepCount === 20) {
+                alert("WINNER");
+                return false;
             }
+            stepCount++;
+            setCounterNumber(stepCount);
+            addStepToSequence();
+            playerSequence = [];
+            setTimeout(() => {
+                startSoundSequence();
+            }, 700);
+        } else {
+            isGameRunning = true;
         }
     }
 
-    $(".btn-start").click(function (e) {
-        e.preventDefault();
-        startGame();
-    });
+    function returnWrongResult() {
+        playerSequence = [];
 
-    $('.circle-quarter').click(function (e) {
-        e.preventDefault();
-        let color = $(this).data('color');
-        playSoundFromButton(color);
-        /* playerSequence.push(color);
-        colorSounds[color].play();
+        // Show the error message on the Counter display
+        $('.counter').val('X');
+
         setTimeout(() => {
-            colorSounds[color].pause();
-            colorSounds[color].currentTime = 0;
-        }, 600);
-        checkSequences(); */
-    });
+            if (strictMode) {
+                startNewGame();
+            } else {
+                setCounterNumber(stepCount);
+                startSoundSequence();
+            }
+        }, 1500);
+    }
+
+    function setCounterNumber(number) {
+        if (number < 10) {
+            number = '0'+number;
+        }
+        $('.counter').val(number);
+    }
 
 });
