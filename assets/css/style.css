@@ -17,7 +17,7 @@ body {
   -o-border-radius: 50%;
   height: 500px;
   margin: 0 auto;
-  margin-top: 10vh;
+  margin-top: 11vh;
   position: relative;
   width: 500px;
 }
@@ -91,7 +91,7 @@ body {
   top: 111px;
 }
 .btn-start:hover {
-  background-color: #daa520;
+  background-color: #8ed01c;
   color: #fff;
 }
 .center-title-wrap {
@@ -126,6 +126,10 @@ body {
   position: absolute;
   top: 200px;
 }
+.btn-on-off:hover {
+  background-color: #2a68a4;
+  color: #fff;
+}
 .on-off {
   position: absolute;
   left: 180px;
@@ -137,6 +141,10 @@ body {
   left: 87px;
   position: absolute;
   top: 160px;
+}
+.btn-strict:hover {
+  background-color: #c30802;
+  color: #fff;
 }
 .strict {
   position: absolute;

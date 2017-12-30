@@ -9,6 +9,8 @@ $(function () {
     var strictMode = false;
     var isGameOn = false;
     var isGameRunning = false;
+    var flashInterval;
+    var flashCounter = 0;
 
     function resetVariables() {
         targetSequence = [];
@@ -47,7 +49,7 @@ $(function () {
         e.preventDefault();
         if (!isGameOn) return false;
         strictMode = !strictMode;
-        let displayColor = strictMode ? 'salmon' : '#000' ;
+        let displayColor = strictMode ? '#edb100' : '#000' ;
         $('.strict').css('background-color', displayColor);
     });
 
@@ -57,11 +59,12 @@ $(function () {
         if (!isGameOn) {
             resetVariables();
         }
-        let displayColor = isGameOn ? 'salmon' : '#000' ;
+        let displayColor = isGameOn ? '#edb100' : '#000' ;
         $('.on-off').css('background-color', displayColor);
     });
 
     function playSoundFromArray() {
+        if (!isGameOn) return false;
         if (targetSequenceCopy.length) {
 
             var currentColor = targetSequenceCopy.shift();
@@ -114,6 +117,7 @@ $(function () {
     }
 
     function checkSequences() {
+        if (!isGameOn) return false;
         // console.log("Checking sequences", playerSequence, targetSequence);
         isGameRunning = false;
         for (let i = 0; i < playerSequence.length; i++) {
@@ -126,7 +130,10 @@ $(function () {
         
         if (playerSequence.length == targetSequence.length) {
             if (stepCount === 20) {
-                alert("WINNER");
+                flashMessage('WIN!');
+                setTimeout(() => {
+                    startNewGame();
+                }, 4100);
                 return false;
             }
             stepCount++;
@@ -145,7 +152,8 @@ $(function () {
         playerSequence = [];
 
         // Show the error message on the Counter display
-        $('.counter').val('X');
+        // $('.counter').val('!!');
+        flashMessage('!!');
 
         setTimeout(() => {
             if (strictMode) {
@@ -154,7 +162,7 @@ $(function () {
                 setCounterNumber(stepCount);
                 startSoundSequence();
             }
-        }, 1500);
+        }, 4100);
     }
 
     function setCounterNumber(number) {
@@ -162,6 +170,20 @@ $(function () {
             number = '0'+number;
         }
         $('.counter').val(number);
+    }
+
+    function flashMessage(message) {
+        
+        flashInterval = setInterval(function() {
+            let currentMessage = $('.counter').val();
+            $('.counter').val(currentMessage ? '' : message);
+            if (flashCounter > 5) {
+                clearInterval(flashInterval);
+                flashCounter = 0;
+            } else {
+                flashCounter++;
+            }
+        }, 500);
     }
 
 });

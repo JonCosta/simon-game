@@ -43,7 +43,7 @@ body {
     -o-border-radius: 50%;
     height: $circle-main-size
     margin: 0 auto
-    margin-top: 10vh
+    margin-top: 11vh
     position: relative
     width: $circle-main-size
 }
@@ -124,7 +124,7 @@ body {
     top: 111px
 
     &:hover {
-        background-color goldenrod
+        background-color lighten($colorStartButton, 10%)
         color: #fff
     }
 }
@@ -142,7 +142,6 @@ body {
     font-size: 30px
     text-decoration: underline
 }
-
 
 .counter {
     background-color: $colorBlack
@@ -164,6 +163,10 @@ body {
     left: 80px
     position: absolute
     top: 200px
+    &:hover {
+        background-color lighten($colorOnOffButton, 10%)
+        color: #fff
+    }
 }
 
 .on-off {
@@ -178,6 +181,10 @@ body {
     left: 87px
     position: absolute
     top: 160px
+    &:hover {
+        background-color lighten($colorStrictButton, 10%)
+        color: #fff
+    }
 }
 
 .strict {
@@ -193,7 +200,5 @@ body {
     -moz-border-radius: 50%;
     -o-border-radius: 50%;
     height: 20px
-    // position: absolute
     width: 20px
-
 }
